@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
@@ -9,12 +9,20 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="index.html">
+        <img src="assets/images/logo.png" class="logo" alt="fisheye logo"/>
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
+      <label>Trier par</label>
+      <select name="tri">
+        <option value="popularite">Popularité</option>
+        <option value="date">Date</option>
+        <option value="titre">Titre</option>
+      </select>
     </main>
     <div id="contact_modal">
 			<div class="modal">
@@ -25,13 +33,19 @@
 				<form>
 					<div>
 						<label>Prénom</label>
-						<input />
+						<input title="prenom" />
+            <label>Nom</label>
+						<input title="nom" />
+            <label>Email</label>
+						<input title="email" />
+            <label>Votre message</label>
+						<textarea title="message"></textarea>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button type="submit" class="contact_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/pages/photographer.js"></script>
+    <script type="module" src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>
