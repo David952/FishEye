@@ -4,12 +4,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-}
-
-body {
     font-family: "DM Sans", sans-serif;
 }
-
 
 header {
     display: flex;
@@ -17,16 +13,20 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
+    margin-right: 100px;
 }
 
 h1 {
     color: #901C1C;
-    margin-right: 100px;
+}
+
+a {
+    text-decoration: none;
 }
 
 .logo {
     height: 50px;
-    margin-left: 100px;
+    margin: 42px 0 0 100px;
 }
 
 .photographer_section {
@@ -34,6 +34,7 @@ h1 {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 100px;
+    text-align: center;
 }
 
 .photographer_section article {
@@ -45,11 +46,26 @@ h1 {
 }
 
 .photographer_section article h2 {
-    color: #D3573C;
     font-size: 36px;
+    text-align: center;
 }
 
 .photographer_section article img {
     height: 200px;
     width: 200px;
+    border-radius: 100px;
+    object-fit: cover;
+}
+
+#title {
+    color: #D3573C;
+    font-weight: 400;
+}
+
+#cityCountry {
+    color: #901C1C;
+}
+
+#price {
+    color: #757575;
 }
