@@ -5,3 +5,10 @@ export async function getPhotographers() {
 
     return photographers;
 }
+
+export async function getMedias() {
+    const response = await fetch('/data/photographers.json');
+    const media = await response.json()
+
+    return media;
+}
