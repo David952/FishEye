@@ -35,10 +35,6 @@
 }
 
 .photograph-header img {
-    height: 200px;
-    width: 200px;
-    border-radius: 100px;
-    object-fit: cover;
     order: 3;
     margin-right: 50px;
 }
@@ -66,22 +62,6 @@
 .contact_button:focus {
     background-color: #DB8876;
     color: black;
-}
-
-
-select {
-    width: 170px;
-    margin-left: 25px;
-    background-color: #901C1C;
-    color: white;
-    font-size: 18px;
-    border: none;
-    padding: 15px;
-    border-radius: 5px;
-}
-
-option {
-    height: 170px;
 }
 
 
@@ -144,4 +124,53 @@ textarea {
     resize: none;
     outline: none;
     border-radius: 5px;
-  }
+}
+
+
+select {
+    width: 170px;
+    margin-left: 25px;
+    background-color: #901C1C;
+    color: white;
+    font-size: 18px;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+option {
+    height: 170px;
+}
+
+.medias_section {
+    margin-top: 58px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.thumb-imgfull {
+    height: 351px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+}
+
+.thumb-img {
+    height: 300px;
+    background-color: #C4C4C4;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.thumb-textLikes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    color: #901C1C;
+}
+
+.fa-heart {
+    margin-left: 5px;
+}
