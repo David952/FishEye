@@ -13,6 +13,7 @@ export function photographerTemplate(data) {
         a.href = `photographer.html?id=${id}`;
 
         const img = document.createElement('img');
+        img.id = "image";
         img.src = picture;
         img.alt = name;
 
@@ -56,5 +57,6 @@ export function photographerTemplate(data) {
         }
         return { article, img };
     }
-    return { picture, name, city, country, tagline, price, getUserCardDOM }
+    
+    return { getUserCardDOM }
 }
