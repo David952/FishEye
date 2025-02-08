@@ -18,11 +18,12 @@
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
       <label>Trier par</label>
-      <select name="tri">
+      <select title="tri">
         <option value="popularite">Popularité</option>
         <option value="date">Date</option>
         <option value="titre">Titre</option>
       </select>
+      <div class="medias_section"></div>
     </main>
     <div id="contact_modal">
 			<div class="modal">
@@ -33,7 +34,7 @@
 				<form>
 					<div>
 						<label>Prénom</label>
-						<input title="prenom" />
+						<input title="prénom" />
             <label>Nom</label>
 						<input title="nom" />
             <label>Email</label>
@@ -45,6 +46,7 @@
 				</form>
 			</div>
 		</div>
+    <script src="https://kit.fontawesome.com/ebaee48e77.js" crossorigin="anonymous"></script>
     <script type="module" src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
