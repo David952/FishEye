@@ -9,40 +9,40 @@
   </head>
   <body>
     <header>
-      <a href="index.html">
-        <img src="assets/images/logo.png" class="logo" alt="fisheye logo"/>
+      <a href="index.html" aria-label="Fisheye Home page">
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye logo"/>
       </a>
     </header>
-    <main id="main">
+    <main role="main" aria-labelledby="main-heading">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" aria-label="Contact Me">Contactez-moi</button>
       </div>
       <label>Trier par</label>
-      <select title="tri">
+      <select title="Tri" aria-label="Order By">
         <option value="popularite">Popularité</option>
         <option value="date">Date</option>
         <option value="titre">Titre</option>
       </select>
-      <div class="medias_section"></div>
+      <div class="medias_section" aria-labelledby="medias-heading"></div>
     </main>
     <div id="contact_modal">
-			<div class="modal">
+			<div class="modal" role="dialog" aria-labelledby="modal-heading">
 				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <h2></h2>
+          <img id="close" src="assets/icons/close.svg" alt="Icone de fermeture (une croix)" aria-label="Close Contact form" onclick="closeModal()" />
         </header>
-				<form>
+				<form aria-labelledby="form-heading">
 					<div>
-						<label>Prénom</label>
-						<input title="prénom" />
-            <label>Nom</label>
-						<input title="nom" />
-            <label>Email</label>
-						<input title="email" />
-            <label>Votre message</label>
-						<textarea title="message"></textarea>
+						<label for="first">Prénom</label>
+						<input id="first" name="first" title="Prénom" aria-label="First name" />
+            <label for="last">Nom</label>
+						<input id="last" name="last" title="Nom" aria-label="Last name" />
+            <label for="email">Email</label>
+						<input id="email" name="email" title="Email" aria-label="Email" />
+            <label for="message">Votre message</label>
+						<textarea id="message" title="Message" aria-label="Your message"></textarea>
 					</div>
-          <button type="submit" class="contact_button">Envoyer</button>
+          <button type="submit" class="contact_button" aria-label="Send">Envoyer</button>
 				</form>
 			</div>
 		</div>
