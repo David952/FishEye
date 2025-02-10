@@ -1,10 +1,7 @@
-#main {
+main {
     margin: 0 100px;
 }
 
-#contact_modal {
-    display: none;
-}
 
 .photograph-header {
     background-color: #FAFAFA;
@@ -54,26 +51,34 @@
     order: 2;
 }
 
-.contact_button:hover {
+.photograph-header .contact_button:hover {
     background-color: #DB8876;
     color: black;
 }
 
-.contact_button:focus {
+.photograph-header .contact_button:focus {
     background-color: #DB8876;
     color: black;
 }
 
+#contact_modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color:rgba(131, 131, 131, 0.5);
+}
 
 .modal {
+    margin: 13% auto;
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 669px;
+    height: 900px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+    padding: 25px 34px;
 }
 
 .modal header {

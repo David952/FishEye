@@ -11,9 +11,12 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
     height: 90px;
     margin-right: 100px;
+}
+
+#indexHeader {
+    align-items: center;
 }
 
 h1 {
