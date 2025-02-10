@@ -26,14 +26,17 @@ const photographerHeader = document.querySelector(".photograph-header");
 photographerHeader.appendChild(article);
 photographerHeader.appendChild(img);
 
+const photographerName = photographer.name;
+
+const formTitle = document.querySelector("h2");
+formTitle.ariaLabel = `Contact me ${photographerName}`;
+formTitle.textContent = `Contactez-moi ${photographerName}`;
 
 function displayMedias(medias) {
     const mediaSection = document.querySelector('.medias_section');
 
     const photographerMedias = medias.filter(m => m.photographerId === parseInt(photographerId));
     console.log(photographerMedias);
-
-    const photographerName = photographer.name;
 
     photographerMedias.forEach(mediaData => {
         const mediaModel = mediaTemplate({
