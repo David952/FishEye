@@ -28,7 +28,7 @@ export function photographerTemplate(data) {
         h2.ariaLabel = `Photographe: ${name}`;
 
         const cityCountryP = document.createElement('p');
-        cityCountryP.id = "cityCountry";
+        cityCountryP.className = "redColor";
         cityCountryP.textContent = `${city}, ${country}`;
         cityCountryP.ariaLabel = `Ville et Pays: ${city}, ${country}`;
 

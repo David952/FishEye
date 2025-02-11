@@ -1,3 +1,5 @@
+import { displayLightbox } from "../utils/lightbox.js";
+
 export function mediaTemplate(data) {
     const { image, video, title, likes, photographerName } = data;
 
@@ -15,19 +17,24 @@ export function mediaTemplate(data) {
             mediaElement.controls = true;
         }
 
+        mediaElement.addEventListener('click', () => {
+            displayLightbox(mediaPath, title, data.index);
+        })
+
         const textLikesDiv = document.createElement('div');
-        textLikesDiv.className = 'thumb-textLikes';
+        textLikesDiv.className = 'thumb-textLikes redColor';
 
         const titleText = document.createElement('p');
         titleText.className = 'thumb-text';
         titleText.textContent = title;
 
-        const heartIcon = document.createElement('i');
-        heartIcon.className = 'fa-solid fa-heart';
-
         const likesSpan = document.createElement('span');
         likesSpan.className = 'thumb-likes';
         likesSpan.textContent = `${likes}`;;
+
+        const heartIcon = document.createElement('i');
+        heartIcon.className = 'fa-solid fa-heart';
+        heartIcon.ariaLabel = 'likes';
 
         textLikesDiv.appendChild(titleText);
         textLikesDiv.appendChild(likesSpan);
