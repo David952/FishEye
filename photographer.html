@@ -23,9 +23,20 @@
         <option value="date">Date</option>
         <option value="titre">Titre</option>
       </select>
-      <div class="medias_section" aria-labelledby="medias-heading"></div>
+      <section class="medias_section" aria-labelledby="medias-heading"></section>
+      <section class="lightbox_section" aria-hidden="true" aria-labelledby="lightbox-heading">
+        <div class="lightbox" aria-label="Image closeup view">
+          <a class="prev redColor">&#10094;</a>
+          <div class="lightboxImageText">
+            <img class="lightboxImage" />
+            <p class="lightboxText redColor"></p>
+          </div>
+          <button class="close redColor">&times;</button>
+          <a class="next redColor">&#10095;</a>
+        </div>
+      </section>
     </main>
-    <div id="contact_modal">
+    <section id="contact_modal">
 			<div class="modal" role="dialog" aria-labelledby="modal-heading">
 				<header>
           <h2></h2>
@@ -45,7 +56,7 @@
           <button type="submit" class="contact_button" aria-label="Send">Envoyer</button>
 				</form>
 			</div>
-		</div>
+		</section>
     <script src="https://kit.fontawesome.com/ebaee48e77.js" crossorigin="anonymous"></script>
     <script type="module" src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
