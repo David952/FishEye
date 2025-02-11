@@ -19,10 +19,6 @@ header {
     align-items: center;
 }
 
-h1 {
-    color: #901C1C;
-}
-
 a {
     text-decoration: none;
 }
@@ -53,6 +49,10 @@ a {
     text-align: center;
 }
 
+.redColor {
+    color: #901C1C;
+}
+
 #image {
     height: 200px;
     width: 200px;
@@ -63,10 +63,6 @@ a {
 #title {
     color: #D3573C;
     font-weight: 400;
-}
-
-#cityCountry {
-    color: #901C1C;
 }
 
 #price {

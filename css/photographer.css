@@ -163,6 +163,7 @@ option {
 
 .thumb-img {
     height: 300px;
+    width: 350px;
     background-color: #C4C4C4;
     border-radius: 5px;
     object-fit: cover;
@@ -173,9 +174,72 @@ option {
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
-    color: #901C1C;
 }
 
 .fa-heart {
     margin-left: 5px;
+}
+
+.lightbox_section {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow: auto;
+}
+
+.lightbox {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 1242px;
+    height: 900px;
+    margin: 9% auto;
+}
+
+.lightboxImageText {
+    display: flex;
+    flex-direction: column;
+}
+
+.lightboxImage {
+    width: 1050px;
+    height: 900px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.lightboxText {
+    margin-top: 10px;
+    font-size: 24px;
+}
+
+
+.close {
+    position: absolute;
+    right: 25px;
+    margin-top: -25px;
+    font-size: 75px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.prev, .next {
+    position: absolute;
+    font-size: 48px;
+    cursor: pointer;
+}
+
+.prev {
+    top: 50%;
+    left: 35px;
+}
+
+.next {
+    top: 450px;
+    right: 35px;
 }
