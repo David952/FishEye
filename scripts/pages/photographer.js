@@ -1,7 +1,7 @@
 import { getPhotographers, getMedias } from "../utils/getPhotographersMedias.js";
 import { photographerTemplate } from "../templates/photographer.js";
 import { mediaTemplate } from "../templates/media.js";
-import { setMediaItems } from "../utils/lightbox.js";
+import { setLightboxMedias } from "../utils/lightbox.js";
 
 const params = new URLSearchParams(window.location.search);
 const photographerId = params.get("id");
@@ -38,22 +38,23 @@ function displayMedias(medias) {
 
     const photographerMedias = medias.filter(m => m.photographerId === parseInt(photographerId));
 
-    const mediaItems = photographerMedias.map((mediaData, index) => ({
-        src: `assets/images/${photographerName}/${mediaData.video || mediaData.image}`,
-        alt: mediaData.title,
-        index
-    }));
-    console.log(mediaItems);
-    setMediaItems(mediaItems);
-
-    photographerMedias.forEach(mediaData => {
+    photographerMedias.forEach((mediaData, index) => {
         const mediaModel = mediaTemplate({
             ...mediaData,
-            photographerName
+            photographerName,
+            index
         });
         const mediaCard = mediaModel.getMediaCardDOM();
         mediaSection.appendChild(mediaCard);
     });
+    
+    const lightboxMedias = photographerMedias.map((lightboxData, index) => ({
+        src: `assets/images/${photographerName}/${lightboxData.video || lightboxData.image}`,
+        alt: lightboxData.title,
+        index
+    }));
+    
+    setLightboxMedias(lightboxMedias);
 }
 
 displayMedias(media);

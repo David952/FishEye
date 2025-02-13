@@ -13,14 +13,12 @@ const message = document.getElementById('message');
 function displayModal() {
 	contactModal.style.display = "block";
     contactModal.ariaHidden = "false";
-    document.body.style.overflow = "hidden";
     close.focus();
 }
 
 function closeModal() {
     contactModal.style.display = "none";
     contactModal.ariaHidden = "true";
-    document.body.style.overflow = "auto";
     contactButton.focus();
 }
 

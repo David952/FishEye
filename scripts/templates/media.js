@@ -7,20 +7,14 @@ export function mediaTemplate(data) {
         const article = document.createElement('article');
         article.className = 'thumb-imgfull';
 
-        let mediaElement;
-        const mediaPath = `assets/images/${photographerName}/${video ? 'miniature.png' : image}`;
-        const isVideo = mediaPath.endsWith('.mp4');
-        
-        if (isVideo) {
-            mediaElement = document.createElement('video');
+        const mediaElement = document.createElement(video ? 'video' : 'img');
+        mediaElement.className = 'thumb-img';
+        const mediaPath = `assets/images/${photographerName}/${video ? video : image}`;
+        mediaElement.src = mediaPath;
+        mediaElement.alt = title;
+
+        if (video) {
             mediaElement.controls = true;
-            mediaElement.className = 'thumb-img';
-            mediaElement.src = `assets/images/${photographerName}/${video}`;
-        } else {
-            mediaElement = document.createElement('img');
-            mediaElement.className = 'thumb-img';
-            mediaElement.src = mediaPath;
-            mediaElement.alt = title;
         }
 
         mediaElement.addEventListener('click', () => {

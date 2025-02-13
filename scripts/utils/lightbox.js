@@ -1,30 +1,40 @@
 const lightboxSection = document.querySelector('.lightbox_section');
-const lightboxImage = document.querySelector('.lightboxImage');
+const lightboxContent = document.querySelector('.lightboxImageText');
 const lightboxClose = document.querySelector('.close');
 const lightboxText = document.querySelector('.lightboxText');
 const prevButton = document.querySelector('.prev');
 const nextButton = document.querySelector('.next');
-const imgSection = document.querySelectorAll('.medias_section');
-console.log(imgSection);
 
 let currentIndex = 0;
-console.log('Début currentIndex : ', currentIndex);
-let mediaItems = [];
-console.log('Début mediaItems : ', mediaItems);
+let lightboxMedias = [];
 
 export function displayLightbox(src, alt, index) {
-    console.log("Appel à displayLightbox avec index :", index);
-    console.log("Liste actuelle des médias (displayLightbox) :", mediaItems);
-
     lightboxSection.style.display = "block";
     lightboxSection.ariaHidden = "false";
     document.body.style.overflow = "hidden";
-    lightboxImage.src = src;
-    lightboxImage.alt = alt;
-    lightboxText.textContent = alt;
     currentIndex = index;
+    lightboxText.textContent = alt;
 
-    console.log('currentIndex après update (displayLightbox) : ', currentIndex);
+    const existingMediaElement = lightboxContent.querySelector('.lightboxImage, .lightboxVideo');
+    if (existingMediaElement) {
+        existingMediaElement.remove();
+    }
+
+    let mediaElement;
+
+    if (src.endsWith('.mp4')) {
+        mediaElement = document.createElement('video');
+        mediaElement.className = 'lightboxVideo';
+        mediaElement.src = src;
+        mediaElement.controls = true;
+    } else {
+        mediaElement = document.createElement('img');
+        mediaElement.className = 'lightboxImage';
+        mediaElement.src = src;
+        mediaElement.alt = alt;
+    }
+
+    lightboxContent.insertBefore(mediaElement, lightboxText);
 }
 
 function closeLightbox() {
@@ -34,36 +44,29 @@ function closeLightbox() {
 }
 
 function showPrevImage() {
-    console.log("currentIndex avant changement :", currentIndex);
-    currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
-    console.log("currentIndex après changement :", currentIndex);
+    currentIndex--;
+    if (currentIndex < 0) {
+        currentIndex = lightboxMedias.length - 1;
+    }
 
-    const { src, alt } = mediaItems[currentIndex];
-    displayLightbox(src, alt, currentIndex);
+    const media = lightboxMedias[currentIndex];
+    displayLightbox(media.src, media.alt, currentIndex);
 }
 
 function showNextImage() {
-    console.log("currentIndex avant changement :", currentIndex);
-    currentIndex = (currentIndex + 1) % mediaItems.length;
-    console.log("currentIndex après changement :", currentIndex);
+    currentIndex++;
+    if (currentIndex >= lightboxMedias.length) {
+        currentIndex = 0;
+    }
 
-    const { src, alt } = mediaItems[currentIndex];
-    displayLightbox(src, alt, currentIndex);
+    const media = lightboxMedias[currentIndex];
+    displayLightbox(media.src, media.alt, currentIndex);
 }
 
-export function setMediaItems(items) {
-    mediaItems = items;
-    console.log('mediaItems (setMediaItems) : ', mediaItems);
+export function setLightboxMedias(items) {
+    lightboxMedias = items;
 }
 
-
-imgSection.forEach((thumbImg, index) => {
-    thumbImg.addEventListener("click", (event) => {
-        console.log("Click détecté sur miniature :", event.target);
-        console.log("Index envoyé :", index);
-        displayLightbox(thumbImg.src, thumbImg.alt, index);
-    });
-});
 
 lightboxClose.addEventListener("click", closeLightbox);
 prevButton.addEventListener("click", showPrevImage);
