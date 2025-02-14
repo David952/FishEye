@@ -49,8 +49,8 @@ function showPrevImage() {
         currentIndex = lightboxMedias.length - 1;
     }
 
-    const media = lightboxMedias[currentIndex];
-    displayLightbox(media.src, media.alt, currentIndex);
+    const mediaContent = lightboxMedias[currentIndex];
+    displayLightbox(mediaContent.src, mediaContent.alt, currentIndex);
 }
 
 function showNextImage() {
@@ -59,8 +59,8 @@ function showNextImage() {
         currentIndex = 0;
     }
 
-    const media = lightboxMedias[currentIndex];
-    displayLightbox(media.src, media.alt, currentIndex);
+    const mediaContent = lightboxMedias[currentIndex];
+    displayLightbox(mediaContent.src, mediaContent.alt, currentIndex);
 }
 
 export function setLightboxMedias(items) {
