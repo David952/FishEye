@@ -63,16 +63,16 @@ main {
 
 #contact_modal {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 100%;
+    height: 209%;
     background-color:rgba(131, 131, 131, 0.5);
 }
 
 .modal {
     margin: 13% auto;
     border-radius: 5px;
-    background-color: #DB8876;
     width: 669px;
     height: 900px;
     display: flex;
@@ -169,6 +169,10 @@ option {
     object-fit: cover;
 }
 
+.thumb-img:hover {
+    opacity: 0.8;
+}
+
 .thumb-textLikes {
     display: flex;
     justify-content: space-between;
@@ -176,13 +180,26 @@ option {
     padding: 10px 0;
 }
 
+.thumb-textLikes .fa-heart {
+    cursor: pointer;
+}
+
+.thumb-textLikes .fa-heart:hover {
+    transform: scale(1.3);
+}
+
 .fa-heart {
     margin-left: 5px;
+}
+
+.darkSalmonBgColor {
+    background-color: #DB8876;
 }
 
 .lightbox_section {
     display: none;
     position: fixed;
+    z-index: 99;
     width: 100%;
     height: 100%;
     top: 0;
@@ -205,11 +222,23 @@ option {
     flex-direction: column;
 }
 
+.lightboxImage.active, .lightboxVideo.active {
+    opacity: 1;
+}
+
 .lightboxImage {
     width: 1050px;
     height: 900px;
     border-radius: 5px;
     object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.lightboxVideo {
+    width: 1050px;
+    height: 900px;
+    border-radius: 5px;
 }
 
 .lightboxText {
@@ -242,4 +271,22 @@ option {
 .next {
     top: 450px;
     right: 35px;
+}
+
+.banner {
+    width: 376px;
+    height: 55px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: -3px;
+    right: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+}
+
+.totalLikesHeart {
+    display: flex;
+    align-items: center;
 }

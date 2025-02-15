@@ -60,6 +60,13 @@ a {
     object-fit: cover;
 }
 
+#image:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+    transition: box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
+}
+
 #title {
     color: #D3573C;
     font-weight: 400;
