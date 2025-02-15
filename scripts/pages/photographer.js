@@ -2,6 +2,7 @@ import { getPhotographers, getMedias } from "../utils/getPhotographersMedias.js"
 import { photographerTemplate } from "../templates/photographer.js";
 import { mediaTemplate } from "../templates/media.js";
 import { setLightboxMedias } from "../utils/lightbox.js";
+import { updateTotalLikes } from "../utils/totalLikes.js";
 
 const params = new URLSearchParams(window.location.search);
 const photographerId = params.get("id");
@@ -43,7 +44,7 @@ function displayMedias(medias) {
             ...mediaData,
             photographerName,
             index
-        });
+        }, photographerMedias);
         const mediaCard = mediaModel.getMediaCardDOM();
         mediaSection.appendChild(mediaCard);
     });
@@ -55,6 +56,8 @@ function displayMedias(medias) {
     }));
     
     setLightboxMedias(lightboxMedias);
+
+    updateTotalLikes(photographerMedias);
 }
 
 displayMedias(media);

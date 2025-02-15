@@ -1,6 +1,7 @@
 import { displayLightbox } from "../utils/lightbox.js";
+import { updateTotalLikes } from "../utils/totalLikes.js";
 
-export function mediaTemplate(data) {
+export function mediaTemplate(data, photographerMedias) {
     const { image, video, title, likes, photographerName } = data;
 
     function getMediaCardDOM() {
@@ -33,9 +34,36 @@ export function mediaTemplate(data) {
         likesSpan.textContent = `${likes}`;;
 
         const heartIcon = document.createElement('i');
-        heartIcon.className = 'fa-solid fa-heart';
+        heartIcon.className = 'fa-regular fa-heart';
         heartIcon.ariaLabel = 'likes';
+        heartIcon.addEventListener('click', () => {
 
+            const mediaItem = photographerMedias.find((item) => item.title === title);
+
+            if (mediaItem) {
+                if (heartIcon.classList.contains('fa-solid')) {
+                    mediaItem.likes -= 1;
+                    heartIcon.classList.remove("fa-solid");
+                    document.querySelectorAll('.fa-heart').forEach(icon => {
+                        icon.style.pointerEvents = "auto";
+                    });
+                } else {
+                    mediaItem.likes += 1;
+                    heartIcon.classList.add("fa-solid");
+                    document.querySelectorAll('.fa-heart').forEach(icon => {
+                        if (icon !== heartIcon) {
+                            icon.style.pointerEvents = "none";
+                        }
+                    });
+                }
+                
+                likesSpan.textContent = mediaItem.likes;
+                likesSpan.appendChild(heartIcon);
+        
+                updateTotalLikes(photographerMedias);
+            }
+        });
+        
         textLikesDiv.appendChild(titleText);
         textLikesDiv.appendChild(likesSpan);
         likesSpan.appendChild(heartIcon);

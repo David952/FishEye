@@ -42,6 +42,11 @@ export function photographerTemplate(data) {
         priceP.textContent = `${price}€/jour`;
         priceP.ariaLabel = `Prix: ${price} euros par jour`;
 
+        const priceDay = document.getElementById('priceDay');
+        if(priceDay) {
+            priceDay.textContent = `${price}€ / jour`;
+        }
+
         if (isHomePage) {
             article.appendChild(a);
             a.appendChild(img);
