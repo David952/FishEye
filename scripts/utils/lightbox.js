@@ -17,9 +17,12 @@ export function displayLightbox(src, alt, index) {
 
     const existingMediaElement = lightboxContent.querySelector('.lightboxImage, .lightboxVideo');
     if (existingMediaElement) {
-        existingMediaElement.remove();
+        existingMediaElement.classList.remove('active');
+        setTimeout(() => {
+            existingMediaElement.remove();
+        }, 1);
     }
-
+    
     let mediaElement;
 
     if (src.endsWith('.mp4')) {
@@ -35,6 +38,10 @@ export function displayLightbox(src, alt, index) {
     }
 
     lightboxContent.insertBefore(mediaElement, lightboxText);
+
+    setTimeout(() => {
+        mediaElement.classList.add('active');
+    }, 10);
 }
 
 function closeLightbox() {
