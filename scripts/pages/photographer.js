@@ -6,7 +6,6 @@ import { updateTotalLikes } from "../utils/totalLikes.js";
 
 const params = new URLSearchParams(window.location.search);
 const photographerId = params.get("id");
-
 const { photographers } = await getPhotographers();
 
 const { media } = await getMedias();
@@ -28,17 +27,25 @@ const photographerHeader = document.querySelector(".photograph-header");
 photographerHeader.appendChild(article);
 photographerHeader.appendChild(img);
 
-const photographerName = photographer.name;
+export const photographerName = photographer.name;
 
 const formTitle = document.querySelector("h2");
 formTitle.ariaLabel = `Contact me ${photographerName}`;
 formTitle.textContent = `Contactez-moi ${photographerName}`;
 
-function displayMedias(medias) {
-    const mediaSection = document.querySelector('.medias_section');
+export const mediaSection = document.querySelector('.medias_section');
 
-    const photographerMedias = medias.filter(m => m.photographerId === parseInt(photographerId));
+let photographerMedias = [];
 
+export function setPhotographerMedias(medias) {
+    photographerMedias = medias.filter(m => m.photographerId === parseInt(photographerId));
+}
+
+export function getPhotographerMedias() {
+    return photographerMedias;
+}
+
+function photographerMediasDisplay() {
     photographerMedias.forEach((mediaData, index) => {
         const mediaModel = mediaTemplate({
             ...mediaData,
@@ -48,7 +55,9 @@ function displayMedias(medias) {
         const mediaCard = mediaModel.getMediaCardDOM();
         mediaSection.appendChild(mediaCard);
     });
-    
+}
+
+function lightboxMedias() {
     const lightboxMedias = photographerMedias.map((lightboxData, index) => ({
         src: `assets/images/${photographerName}/${lightboxData.video || lightboxData.image}`,
         alt: lightboxData.title,
@@ -56,6 +65,15 @@ function displayMedias(medias) {
     }));
     
     setLightboxMedias(lightboxMedias);
+}
+
+function displayMedias(medias) {
+
+    setPhotographerMedias(medias);
+
+    photographerMediasDisplay();
+
+    lightboxMedias();
 
     updateTotalLikes(photographerMedias);
 }
