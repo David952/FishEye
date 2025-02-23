@@ -49,6 +49,7 @@ main {
     border-radius: 5px;
     cursor: pointer;
     order: 2;
+    margin-top: 26px;
 }
 
 .photograph-header .contact_button:hover {
@@ -66,7 +67,7 @@ main {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 209%;
+    height: 216%;
     background-color:rgba(131, 131, 131, 0.5);
 }
 
@@ -107,14 +108,6 @@ form label {
     font-size: 36px;
 }
 
-form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
-}
-
 form input {
     width: 100%;
     height: 68px;
@@ -151,19 +144,20 @@ option {
     margin-top: 58px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
 }
 
 .thumb-imgfull {
-    height: 351px;
-    width: 350px;
+    height: 451px;
+    width: 550px;
     display: flex;
     flex-direction: column;
-    margin-right: 50px;
+    margin-bottom: 25px;
 }
 
 .thumb-img {
-    height: 300px;
-    width: 350px;
+    height: 400px;
+    width: 550px;
     background-color: #C4C4C4;
     border-radius: 5px;
     object-fit: cover;
@@ -289,4 +283,28 @@ option {
 .totalLikesHeart {
     display: flex;
     align-items: center;
+}
+
+@media screen and (max-width: 1920px) {
+    .thumb-imgfull {
+        height: 451px;
+        width: 450px;
+    }
+    
+    .thumb-img {
+        height: 400px;
+        width: 450px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .thumb-imgfull {
+        height: 351px;
+        width: 350px;
+    }
+    
+    .thumb-img {
+        height: 300px;
+        width: 350px;
+    }
 }
