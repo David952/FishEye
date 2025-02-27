@@ -42,12 +42,15 @@ export function displayLightbox(src, alt, index) {
     setTimeout(() => {
         mediaElement.classList.add('active');
     }, 10);
+    
+    prevButton.focus();
 }
 
 function closeLightbox() {
     lightboxSection.style.display = "none";
     lightboxSection.ariaHidden = "true";
     document.body.style.overflow = "auto";
+    document.querySelector(".thumb-img").focus();
 }
 
 function showPrevImage() {
@@ -79,13 +82,26 @@ lightboxClose.addEventListener("click", closeLightbox);
 prevButton.addEventListener("click", showPrevImage);
 nextButton.addEventListener("click", showNextImage);
 
-document.addEventListener("keydown", e => {
+prevButton.addEventListener("keypress", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+        showPrevImage();
+    }
+});
+
+nextButton.addEventListener("keypress", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+        showNextImage();
+    }
+});
+
+
+document.addEventListener("keydown", (event) => {
     if (lightboxSection.ariaHidden === "false") {
-        if (e.key === "Escape") {
+        if (event.key === "Escape") {
             closeLightbox();
-        } else if (e.key === "ArrowLeft") {
+        } else if (event.key === "ArrowLeft") {
             showPrevImage();
-        } else if (e.key === "ArrowRight") {
+        } else if (event.key === "ArrowRight") {
             showNextImage();
         }
     }

@@ -1,7 +1,6 @@
 const contactButton = document.querySelector(".contact_button");
 const form = document.querySelector("form");
 const contactModal = document.getElementById("contact_modal");
-const modal = document.querySelector(".modal");
 const close = document.getElementById('close');
 
 const first = document.getElementById('first');
@@ -21,6 +20,16 @@ function closeModal() {
     contactModal.ariaHidden = "true";
     contactButton.focus();
 }
+
+contactButton.addEventListener("click", () => {
+    displayModal();
+})
+
+close.addEventListener("keypress", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+        closeModal();
+    }
+});
 
 document.addEventListener('keydown', e => {
     if (contactModal.ariaHidden === "false" && e.key === 'Escape') {
@@ -43,6 +52,7 @@ form.addEventListener("submit", (event) => {
 })
 
 close.addEventListener("click", () => {
+    closeModal();
     form.reset();
     console.clear();
 })
