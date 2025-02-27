@@ -2,7 +2,7 @@ import { displayLightbox } from "../utils/lightbox.js";
 import { updateTotalLikes } from "../utils/totalLikes.js";
 
 export function mediaTemplate(data, photographerMedias) {
-    const { image, video, title, likes, photographerName } = data;
+    const { image, video, title, likes, photographerName, isLiked, id } = data;
 
     function getMediaCardDOM() {
         const article = document.createElement('article');
@@ -13,14 +13,17 @@ export function mediaTemplate(data, photographerMedias) {
         const mediaPath = `assets/images/${photographerName}/${video ? video : image}`;
         mediaElement.src = mediaPath;
         mediaElement.alt = title;
-
-        if (video) {
-            mediaElement.controls = true;
-        }
+        mediaElement.tabIndex = "0";
 
         mediaElement.addEventListener('click', () => {
             displayLightbox(mediaPath, title, data.index);
         })
+
+        mediaElement.addEventListener("keypress", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                displayLightbox(mediaPath, title, data.index);
+            }
+        });
 
         const textLikesDiv = document.createElement('div');
         textLikesDiv.className = 'thumb-textLikes redColor';
@@ -31,42 +34,62 @@ export function mediaTemplate(data, photographerMedias) {
 
         const likesSpan = document.createElement('span');
         likesSpan.className = 'thumb-likes';
-        likesSpan.textContent = `${likes}`;;
+        likesSpan.textContent = `${likes}`;
+
+        const heartButton = document.createElement('button');
+        heartButton.type = 'button';
+        heartButton.className = 'heart-button';
+        heartButton.tabIndex = "0";
+        heartButton.ariaLabel = isLiked;
 
         const heartIcon = document.createElement('i');
-        heartIcon.className = 'fa-regular fa-heart';
-        heartIcon.ariaLabel = 'likes';
-        heartIcon.addEventListener('click', () => {
+        heartIcon.className = 'fa-heart redColor';
 
-            const mediaItem = photographerMedias.find((item) => item.title === title);
+        if (isLiked) {
+            heartIcon.classList.add("fa-solid");
+        } else {
+            heartIcon.classList.add("fa-regular");
+        }
 
-            if (mediaItem) {
-                if (heartIcon.classList.contains('fa-solid')) {
-                    mediaItem.likes -= 1;
-                    heartIcon.classList.remove("fa-solid");
-                    document.querySelectorAll('.fa-heart').forEach(icon => {
-                        icon.style.pointerEvents = "auto";
-                    });
-                } else {
-                    mediaItem.likes += 1;
-                    heartIcon.classList.add("fa-solid");
-                    document.querySelectorAll('.fa-heart').forEach(icon => {
-                        if (icon !== heartIcon) {
-                            icon.style.pointerEvents = "none";
-                        }
-                    });
+        const updateHeartIcon = () => {
+            heartButton.addEventListener('click', () => {
+                const mediaItem = photographerMedias.find((item) => item.id === id);
+
+                if (mediaItem) {
+                    if (heartIcon.classList.contains('fa-solid')) {
+                        mediaItem.likes -= 1;
+                        heartIcon.classList.remove("fa-solid");
+                        heartIcon.classList.add("fa-regular");
+                        mediaItem.isLiked = false;
+                        heartButton.ariaLabel = 'Add a like';
+                    } else {
+                        mediaItem.likes += 1;
+                        heartIcon.classList.remove("fa-regular");
+                        heartIcon.classList.add("fa-solid");
+                        mediaItem.isLiked = true;
+                        heartButton.ariaLabel = 'Remove a like';
+                    }
+
+                    likesSpan.textContent = mediaItem.likes;
+                    likesSpan.appendChild(heartButton);
+
+                    updateTotalLikes(photographerMedias);
                 }
-                
-                likesSpan.textContent = mediaItem.likes;
-                likesSpan.appendChild(heartIcon);
-        
-                updateTotalLikes(photographerMedias);
-            }
-        });
-        
+            });
+
+            heartIcon.addEventListener("keypress", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    heartIcon.click();
+                }
+            });
+        };
+
+        updateHeartIcon();
+
         textLikesDiv.appendChild(titleText);
         textLikesDiv.appendChild(likesSpan);
-        likesSpan.appendChild(heartIcon);
+        likesSpan.appendChild(heartButton);
+        heartButton.appendChild(heartIcon);
         article.appendChild(mediaElement);
         article.appendChild(textLikesDiv);
 
