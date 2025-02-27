@@ -3,6 +3,7 @@ import { photographerTemplate } from "../templates/photographer.js";
 import { mediaTemplate } from "../templates/media.js";
 import { setLightboxMedias } from "../utils/lightbox.js";
 import { updateTotalLikes } from "../utils/totalLikes.js";
+import { initializePhotographerMedias, sortMedias } from "../utils/sort.js";
 
 const params = new URLSearchParams(window.location.search);
 const photographerId = params.get("id");
@@ -35,10 +36,13 @@ formTitle.textContent = `Contactez-moi ${photographerName}`;
 
 export const mediaSection = document.querySelector('.medias_section');
 
-let photographerMedias = [];
+let photographerMedias;
 
 export function setPhotographerMedias(medias) {
-    photographerMedias = medias.filter(m => m.photographerId === parseInt(photographerId));
+    photographerMedias = medias.filter(m => m.photographerId === parseInt(photographerId)).map(media => ({
+        ...media,
+        isLiked: false,
+        }));
 }
 
 export function getPhotographerMedias() {
@@ -50,7 +54,8 @@ function photographerMediasDisplay() {
         const mediaModel = mediaTemplate({
             ...mediaData,
             photographerName,
-            index
+            index,
+            isLiked: mediaData.isLiked,
         }, photographerMedias);
         const mediaCard = mediaModel.getMediaCardDOM();
         mediaSection.appendChild(mediaCard);
@@ -71,11 +76,16 @@ function displayMedias(medias) {
 
     setPhotographerMedias(medias);
 
+    initializePhotographerMedias();
+    
+    sortMedias('popularity');
+    
     photographerMediasDisplay();
 
     lightboxMedias();
 
     updateTotalLikes(photographerMedias);
+
 }
 
 displayMedias(media);
