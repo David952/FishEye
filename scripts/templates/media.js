@@ -13,15 +13,17 @@ export function mediaTemplate(data, photographerMedias) {
         const mediaPath = `assets/images/${photographerName}/${video ? video : image}`;
         mediaElement.src = mediaPath;
         mediaElement.alt = title;
+        mediaElement.ariaLabel = title;
         mediaElement.tabIndex = "0";
+        mediaElement.id = `media-${id}`;
 
         mediaElement.addEventListener('click', () => {
-            displayLightbox(mediaPath, title, data.index);
+            displayLightbox(mediaPath, title, data.index, mediaElement.id);
         })
 
         mediaElement.addEventListener("keypress", (event) => {
             if (event.key === "Enter" || event.key === " ") {
-                displayLightbox(mediaPath, title, data.index);
+                displayLightbox(mediaPath, title, data.index, mediaElement.id);
             }
         });
 
@@ -35,12 +37,13 @@ export function mediaTemplate(data, photographerMedias) {
         const likesSpan = document.createElement('span');
         likesSpan.className = 'thumb-likes';
         likesSpan.textContent = `${likes}`;
+        likesSpan.ariaLive = "polite";
 
         const heartButton = document.createElement('button');
         heartButton.type = 'button';
         heartButton.className = 'heart-button';
         heartButton.tabIndex = "0";
-        heartButton.ariaLabel = isLiked;
+        heartButton.ariaLabel = isLiked ? "Remove a like" : "Add a like";
 
         const heartIcon = document.createElement('i');
         heartIcon.className = 'fa-heart redColor';

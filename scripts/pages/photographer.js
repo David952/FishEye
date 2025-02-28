@@ -30,10 +30,6 @@ photographerHeader.appendChild(img);
 
 export const photographerName = photographer.name;
 
-const formTitle = document.querySelector("h2");
-formTitle.ariaLabel = `Contact me ${photographerName}`;
-formTitle.textContent = `Contactez-moi ${photographerName}`;
-
 export const mediaSection = document.querySelector('.medias_section');
 
 let photographerMedias;
@@ -49,25 +45,38 @@ export function getPhotographerMedias() {
     return photographerMedias;
 }
 
-function photographerMediasDisplay() {
-    photographerMedias.forEach((mediaData, index) => {
-        const mediaModel = mediaTemplate({
-            ...mediaData,
-            photographerName,
-            index,
-            isLiked: mediaData.isLiked,
-        }, photographerMedias);
-        const mediaCard = mediaModel.getMediaCardDOM();
-        mediaSection.appendChild(mediaCard);
-    });
+export function photographerMediasDisplay(medias) {
+     mediaSection.innerHTML = '';
+    
+        medias.forEach((mediaData, index) => {
+            const originalMediaData = photographerMedias.find(m => m.id === mediaData.id);
+    
+            const mediaModel = mediaTemplate({
+                ...mediaData,
+                photographerName,
+                index,
+                isLiked: originalMediaData ? originalMediaData.isLiked : false
+            }, photographerMedias);
+    
+            const mediaCard = mediaModel.getMediaCardDOM();
+            mediaSection.appendChild(mediaCard);
+        });
+    
+        updateTotalLikes(photographerMedias);
 }
 
-function lightboxMedias() {
-    const lightboxMedias = photographerMedias.map((lightboxData, index) => ({
-        src: `assets/images/${photographerName}/${lightboxData.video || lightboxData.image}`,
-        alt: lightboxData.title,
-        index
-    }));
+export function lightboxMedias() {
+    const mediaElements = document.querySelectorAll('.thumb-imgfull');
+    
+    const lightboxMedias = Array.from(mediaElements).map((element, index) => {
+        const mediaElement = element.querySelector('.thumb-img');
+        const titleElement = element.querySelector('.thumb-text');
+        return {
+            src: mediaElement.src,
+            alt: titleElement.textContent,
+            index
+        };
+    });
     
     setLightboxMedias(lightboxMedias);
 }
@@ -79,13 +88,8 @@ function displayMedias(medias) {
     initializePhotographerMedias();
     
     sortMedias('popularity');
-    
-    photographerMediasDisplay();
-
-    lightboxMedias();
 
     updateTotalLikes(photographerMedias);
-
 }
 
 displayMedias(media);

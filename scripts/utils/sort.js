@@ -1,7 +1,4 @@
-import { getPhotographerMedias, mediaSection, photographerName } from "../pages/photographer.js";
-import { mediaTemplate } from "../templates/media.js";
-import { setLightboxMedias } from "./lightbox.js";
-import { updateTotalLikes } from "./totalLikes.js";
+import { getPhotographerMedias, photographerMediasDisplay, lightboxMedias} from "../pages/photographer.js";
 
 const sortDropdown = document.querySelector('select');
 let photographerMedias;
@@ -9,6 +6,10 @@ let photographerMedias;
 export function initializePhotographerMedias() {
     photographerMedias = getPhotographerMedias();
 }
+
+sortDropdown.addEventListener('click', () => {
+    sortDropdown.ariaExpanded = "true";
+})
 
 sortDropdown.addEventListener('change', (event) => {
     const sortBy = event.target.value;
@@ -34,36 +35,6 @@ export function sortMedias(sortBy) {
             break;
     }
     
-    updateMediaDisplay(sortedMedias);
-    updateLightbox(sortedMedias);
-}
-
-function updateMediaDisplay(medias) {
-    mediaSection.innerHTML = '';
-
-    medias.forEach((mediaData, index) => {
-        const originalMediaData = photographerMedias.find(m => m.id === mediaData.id);
-
-        const mediaModel = mediaTemplate({
-            ...mediaData,
-            photographerName,
-            index,
-            isLiked: originalMediaData ? originalMediaData.isLiked : false
-        }, photographerMedias);
-
-        const mediaCard = mediaModel.getMediaCardDOM();
-        mediaSection.appendChild(mediaCard);
-    });
-
-    updateTotalLikes(photographerMedias);
-}
-
-function updateLightbox(medias) {
-    const lightboxMedias = medias.map((mediaData, index) => ({
-        src: `assets/images/${photographerName}/${mediaData.video || mediaData.image}`,
-        alt: mediaData.title,
-        index
-    }));
-
-    setLightboxMedias(lightboxMedias);
+    photographerMediasDisplay(sortedMedias);
+    lightboxMedias();
 }

@@ -5,15 +5,29 @@ const lightboxText = document.querySelector('.lightboxText');
 const prevButton = document.querySelector('.prev');
 const nextButton = document.querySelector('.next');
 
+let mediaId
 let currentIndex = 0;
 let lightboxMedias = [];
 
-export function displayLightbox(src, alt, index) {
+const focusableElements = 'button, [tabindex="0"]';
+let focusableContent;
+let firstFocusableElement;
+let lastFocusableElement;
+
+export function displayLightbox(src, alt, index, id) {
     lightboxSection.style.display = "block";
     lightboxSection.ariaHidden = "false";
+    lightboxSection.ariaModal = "true";
     document.body.style.overflow = "hidden";
+    
     currentIndex = index;
+    mediaId = id;
     lightboxText.textContent = alt;
+
+    focusableContent = lightboxSection.querySelectorAll(focusableElements);
+    firstFocusableElement = focusableContent[0];
+    lastFocusableElement = focusableContent[focusableContent.length - 1];
+    lightboxClose.focus();
 
     const existingMediaElement = lightboxContent.querySelector('.lightboxImage, .lightboxVideo');
     if (existingMediaElement) {
@@ -42,15 +56,36 @@ export function displayLightbox(src, alt, index) {
     setTimeout(() => {
         mediaElement.classList.add('active');
     }, 10);
-    
-    prevButton.focus();
+}
+
+document.addEventListener('keydown', trapFocus);
+
+function trapFocus(event) {
+    if (lightboxSection.ariaHidden === "false") {
+        if (event.key === "Tab") {
+            if (event.shiftKey) {
+                if (document.activeElement === firstFocusableElement) {
+                    event.preventDefault();
+                    lastFocusableElement.focus();
+                }
+            } else {
+                if (document.activeElement === lastFocusableElement) {
+                    event.preventDefault();
+                    firstFocusableElement.focus();
+                }
+            }
+        }
+    }
 }
 
 function closeLightbox() {
     lightboxSection.style.display = "none";
     lightboxSection.ariaHidden = "true";
+    lightboxSection.ariaModal = "false";
     document.body.style.overflow = "auto";
-    document.querySelector(".thumb-img").focus();
+    if (mediaId) {
+        document.querySelector(`#${mediaId}`).focus();
+    }
 }
 
 function showPrevImage() {
