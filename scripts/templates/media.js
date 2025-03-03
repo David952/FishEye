@@ -1,9 +1,22 @@
 import { displayLightbox } from "../utils/lightbox.js";
 import { updateTotalLikes } from "../utils/totalLikes.js";
 
+/**
+ * Modèle pour créer un élément média (image ou vidéo).
+ * @param {Object} data - Informations sur le média.
+ * @param {Array} photographerMedias - Liste des médias du photographe.
+ * @returns {Object} Objet contenant la méthode `getMediaCardDOM` pour générer la carte média.
+ */
 export function mediaTemplate(data, photographerMedias) {
     const { image, video, title, likes, photographerName, isLiked, id } = data;
 
+    /**
+     * Génère la carte DOM pour un média.
+     * Crée un élément `<article>` contenant un média (image ou vidéo), un titre, un compteur de likes et un bouton de like.
+     * Gère également les événements pour la lightbox et les likes.
+     * 
+     * @returns {HTMLElement} Élément `<article>` représentant un média.
+     */
     function getMediaCardDOM() {
         const article = document.createElement('article');
         article.className = 'thumb-imgfull';
@@ -12,14 +25,15 @@ export function mediaTemplate(data, photographerMedias) {
         mediaElement.className = 'thumb-img';
         const mediaPath = `assets/images/${photographerName}/${video ? video : image}`;
         mediaElement.src = mediaPath;
-        mediaElement.alt = title;
+        mediaElement.alt = `Photo : ${title}`;
         mediaElement.ariaLabel = title;
         mediaElement.tabIndex = "0";
         mediaElement.id = `media-${id}`;
 
+        // Gestion de l'ouverture de la lightbox au clic ou à la pression de la touche "Entrée/Espace"
         mediaElement.addEventListener('click', () => {
             displayLightbox(mediaPath, title, data.index, mediaElement.id);
-        })
+        });
 
         mediaElement.addEventListener("keypress", (event) => {
             if (event.key === "Enter" || event.key === " ") {
@@ -43,9 +57,8 @@ export function mediaTemplate(data, photographerMedias) {
         heartButton.type = 'button';
         heartButton.className = 'heart-button';
         heartButton.tabIndex = "0";
-        heartButton.ariaLabel = isLiked ? "Remove a like" : "Add a like";
 
-        const heartIcon = document.createElement('i');
+        const heartIcon = document.createElement('span');
         heartIcon.className = 'fa-heart redColor';
 
         if (isLiked) {
@@ -54,6 +67,10 @@ export function mediaTemplate(data, photographerMedias) {
             heartIcon.classList.add("fa-regular");
         }
 
+        /**
+         * Met à jour l'icône de cœur et gère l'ajout/retrait de likes.
+         * Ajoute un écouteur d'événement sur le bouton de like pour basculer entre les états "liké" et "non liké".
+         */
         const updateHeartIcon = () => {
             heartButton.addEventListener('click', () => {
                 const mediaItem = photographerMedias.find((item) => item.id === id);
@@ -75,7 +92,6 @@ export function mediaTemplate(data, photographerMedias) {
 
                     likesSpan.textContent = mediaItem.likes;
                     likesSpan.appendChild(heartButton);
-
                     updateTotalLikes(photographerMedias);
                 }
             });
