@@ -9,13 +9,13 @@
   </head>
   <body>
     <header>
-      <a href="index.html" aria-label="Fisheye Home page">
-        <img src="assets/images/logo.png" class="logo" alt="Fisheye logo">
+      <a href="index.html">
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page">
       </a>
     </header>
     <main>
       <div class="photograph-header">
-        <button class="contact_button" aria-label="Contact Me">Contactez-moi</button>
+        <button class="contact_button" aria-label="Contact Mee">Contactez-moi</button>
       </div>
       <label for="order-by">Trier par</label>
       <select id="order-by" aria-label="Order By">
@@ -25,9 +25,9 @@
       </select>
       <section class="medias_section" aria-label="medias section"></section>
       <section class="lightbox_section" aria-label="lightbox section">
-        <div class="lightbox" aria-label="Image closeup view" aria-live="polite">
+        <div class="lightbox" aria-label="Image closeup view">
           <button type="button" class="prev redColor" aria-label="Previous image" tabindex="0">&#10094;</button>
-          <div class="lightboxImageText">
+          <div class="lightboxImageText" aria-live="polite">
             <p class="lightboxText redColor"></p>
           </div>
           <button type="button" class="close redColor" aria-label="Close dialog" tabindex="0">&times;</button>
@@ -36,7 +36,7 @@
       </section>
       <aside class="banner darkSalmonBgColor" aria-label="Total likes and price day">
         <div class="totalLikesHeart">
-          <p id="totalLikes"></p>
+          <p id="totalLikes" aria-live="polite"></p>
           <span class="fa-solid fa-heart"></span>
         </div>
         <p id="priceDay"></p>
@@ -45,20 +45,20 @@
     <section id="contact_modal" role="dialog" inert>
 			<div class="modal darkSalmonBgColor">
 				<header>
-          <button type="button" id="close" aria-label="Close form" tabindex="0">
+          <button type="button" id="close" aria-label="Close Contact form" tabindex="0">
             <img src="assets/icons/close.svg" alt="Close">
           </button>
         </header>
 				<form aria-label="form content">
 					<label for="first">Prénom</label>
-						<input type="text" id="first" name="first" title="Prénom" tabindex="0">
+						<input type="text" id="first" name="first" title="Prénom" tabindex="0" aria-label="First name">
             <label for="last">Nom</label>
-						<input type="text" id="last" name="last" title="Nom" tabindex="0">
+						<input type="text" id="last" name="last" title="Nom" tabindex="0" aria-label="Last name">
             <label for="email">Email</label>
-						<input type="email" id="email" name="email" title="Email" tabindex="0">
+						<input type="email" id="email" name="email" title="Email" tabindex="0" aria-label="Email">
             <label for="message">Votre message</label>
-						<textarea id="message" title="Message" tabindex="0"></textarea>
-          <button type="submit" class="contact_button" tabindex="0">Envoyer</button>
+						<textarea id="message" title="Votre message" tabindex="0" aria-label="Your message"></textarea>
+          <button type="submit" class="contact_button" tabindex="0" aria-label="Send">Envoyer</button>
 				</form>
 			</div>
 		</section>
