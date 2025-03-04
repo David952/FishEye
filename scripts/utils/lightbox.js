@@ -35,7 +35,6 @@ export function displayLightbox(src, alt, index, id) {
     const { firstFocusableElement: first, lastFocusableElement: last } = initializeFocusableElements(lightboxSection);
     firstFocusableElement = first;
     lastFocusableElement = last;
-
     prevButton.focus();
 
     // Suppression du média existant dans la lightbox
@@ -53,13 +52,12 @@ export function displayLightbox(src, alt, index, id) {
     if (src.endsWith('.mp4')) {
         mediaElement = document.createElement('video');
         mediaElement.className = 'lightboxVideo';
-        mediaElement.ariaLive = 'polite';
         mediaElement.src = src;
+        mediaElement.ariaLabel = alt;
         mediaElement.controls = true;
     } else {
         mediaElement = document.createElement('img');
         mediaElement.className = 'lightboxImage';
-        mediaElement.ariaLive = 'polite';
         mediaElement.src = src;
         mediaElement.alt = alt;
     }

@@ -28,7 +28,7 @@ export function photographerTemplate(data) {
         const img = document.createElement('img');
         img.id = "image";
         img.src = picture;
-        img.alt = `Link to the profil of ${name}`;
+        img.alt = `Profil of ${name}`;
 
         const h1 = document.createElement('h1');
         h1.id = "title";

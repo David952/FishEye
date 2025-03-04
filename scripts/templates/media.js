@@ -57,6 +57,7 @@ export function mediaTemplate(data, photographerMedias) {
         heartButton.type = 'button';
         heartButton.className = 'heart-button';
         heartButton.tabIndex = "0";
+        heartButton.ariaLabel = isLiked ? "Remove a like" : "Add a like";
 
         const heartIcon = document.createElement('span');
         heartIcon.className = 'fa-heart redColor';
