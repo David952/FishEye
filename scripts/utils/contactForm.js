@@ -67,7 +67,7 @@ close.addEventListener("keypress", (event) => {
 });
 
 document.addEventListener('keydown', event => {
-    if (contactModal.ariaHidden === "false" && event.key === 'Escape') {
+    if (!contactModal.hasAttribute('inert') && event.key === 'Escape') {
         closeModal();
     }
 });
